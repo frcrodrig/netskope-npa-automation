@@ -7,3 +7,5 @@ tron-get-publishers will read the publishers and get the name, theCN, the ID, ad
 tron-create-apps will take read an excel file and create private apps based on its contents.
 
 The excel file sample-excel.xlsx is a sample file use for tron-create-apps.
+
+This branch adds code to verify that the hosts specifed resolve to a private non-routeable IP address
