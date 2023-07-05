@@ -1,3 +1,11 @@
+
+import sys
+import logging
+import requests
+import json
+import socket
+from openpyxl import load_workbook
+
 # tron-create apps is a python script that reads a spreadsheet, creates a json object/file and then uses the Private
 # Apps API to post this json data and create a new private app.
 # 
@@ -14,20 +22,57 @@
 #
 # This was written for Netskope release 101 originally, python 3.10 
 # 
-#
+# This fork adds code to check the hosts for a non-routable IP address before writing to the tenant.  We don't want any private apps with public IP addresses in NPA
 #
 ####################################################################################
 
 
 
-import sys
-import logging
-import requests
-import json
-from openpyxl import load_workbook
 
 # set logging level
 logging.basicConfig(level=logging.WARNING)
+
+
+# functions for checking IP address and returning true if it is non-routable.
+
+def is_valid_ipv4_address(address):
+    try:
+        socket.inet_pton(socket.AF_INET, address)
+    except AttributeError:  # no inet_pton here, sorry
+        try:
+            socket.inet_aton(address)
+        except socket.error:
+            return False
+        return address.count('.') == 3
+    except socket.error:  # not a valid address
+        return False
+    return True
+
+def is_non_routeable_ipv4_address(address):
+    if not is_valid_ipv4_address(address):
+        return False
+    first_octet = int(address.split('.')[0])
+    if first_octet == 10:
+        return True
+    if first_octet == 172 and 16 <= int(address.split('.')[1]) <= 31:
+        return True
+    if first_octet == 192 and int(address.split('.')[1]) == 168:
+        return True
+    return False
+
+def resolve_hostname_to_ip_address(hostname):
+    try:
+        ip_address = socket.gethostbyname(hostname)
+
+        if is_non_routeable_ipv4_address(ip_address):
+            print(f"{ip_address} is a non-routeable IP address.")
+            return True
+        else:
+            print(f"{ip_address} is not a non-routeable IP address.")
+            return False
+    except socket.gaierror as e:
+        print(f"Error resolving hostname {hostname}: {e}")
+
 
 
 ####### Check for correct arguments and deliver help message
@@ -73,12 +118,18 @@ ws = wb['Sheet1']
 header = [cell.value for cell in ws[1]]
 
 # Rename a couple of header column names to match json required.
+header[2] = 'host'
 header[4] = 'protocols'
 header[5] = 'publishers'
+
 
 # Get the column indices for the "protocols" and "publishers" columns, they will need to be modified
 port_protocol_index = header.index('protocols') + 1
 publisher_index = header.index('publishers') + 1
+host_index = header.index('host') + 1
+
+# create a private ip boolean flag
+private_ip = False
 
 # Create a list to store the data
 data = []
@@ -102,8 +153,30 @@ for row in ws.iter_rows(min_row=2):
         # Get the value of the cell
         value = cell.value
 
-        # If this is the "protocols" split the value into an array
-        if cell.column == port_protocol_index:
+        # if this is the "hosts" column evaluate each hostname and make sure its a private IP
+        if cell.column == host_index:
+        
+            # split the values at the commas and put in a list
+            host_value = value.split(',')
+
+            #  set a flag for private IPs
+            private_ip = False
+
+            # loop through the split hosts
+            for item in host_value:
+                
+                # test to see if the IP address is non-routeable
+                private_ip = resolve_hostname_to_ip_address(item)
+                print(item)
+                if private_ip == False:
+                    # Skip here if false (if even one is public then we don't need to add it)
+                    continue
+        #    if private_ip == False continue                
+        
+            
+
+        # If this is the "protocols" and hosts are private_ip split the value into an array
+        if cell.column == port_protocol_index and private_ip:
             # create an array
             result = []
             
@@ -125,8 +198,8 @@ for row in ws.iter_rows(min_row=2):
                 
             
 
-        # if this is the "publishers" split the value into an array
-        if cell.column == publisher_index:
+        # if this is the "publishers" and hosts are private_ip split the value into an array
+        if cell.column == publisher_index and private_ip:
             
             # create an array
             result = []
@@ -145,14 +218,15 @@ for row in ws.iter_rows(min_row=2):
 
                 # Append them to the array for json
                 result.append(tempvalue)
-            # Assing the entire array to value    
+            # Assigning the entire array to value    
             value = result
 
         # Add the data from value to the dictionary (of json)
         row_data[column_name] = value
         
-    # Add the dictionary to the list
-    data.append(row_data)
+    # Add the dictionary to the list only if it is a private IP address (skip the row if its a public IP)
+    if private_ip == True:
+        data.append(row_data)
 
     # create a json document of just the row for the API call
     jsonrow_data = json.dumps(row_data, indent=4)
@@ -160,7 +234,8 @@ for row in ws.iter_rows(min_row=2):
 
     # POST the data and print the server response
     response = requests.post(appurlrequest, jsonrow_data, headers=httpheaders)
-    print(response)
+    response_json = response.json()
+    print(response_json)
 
 # Convert the data to JSON
 json_data = json.dumps(data, indent=4)
