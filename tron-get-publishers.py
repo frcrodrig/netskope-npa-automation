@@ -8,6 +8,10 @@
 #
 #  This was written for Netskope release 101 originally, uses python 3.10 and pandas 2.0.1
 #
+# Requires the following arguments in order:
+# 	Full tenant hostname, API token, json filename
+# Example:    python3 tron-get-publishers hostname.goskope.com a458ef832xs389 jsonfile')
+#        
 
 
 import sys
