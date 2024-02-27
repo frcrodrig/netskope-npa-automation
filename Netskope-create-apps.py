@@ -243,7 +243,7 @@ json_data = json.dumps(data, indent=4)
 # Print the JSON data
 print(json_data)
 
-with open( 'temp-tron-create-apps-json.json', 'w') as f:
+with open( 'temp-create-apps-json.json', 'w') as f:
         json.dump(data, f, indent=4,)
 
 
