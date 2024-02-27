@@ -5,7 +5,7 @@ import json
 import pandas as pd
 
 
-# tron-read-apps is script/functions that pulls the private apps via API, then pulls the publisher names and formats
+# netskope-read-apps is script/functions that pulls the private apps via API, then pulls the publisher names and formats
 # them into an excel spreadsheet format.
 #
 # 
