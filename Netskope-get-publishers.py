@@ -10,7 +10,7 @@
 #
 # Requires the following arguments in order:
 # 	Full tenant hostname, API token, json filename
-# Example:    python3 tron-get-publishers hostname.goskope.com a458ef832xs389 jsonfile')
+# Example:    python3 netskope-get-publishers hostname.goskope.com a458ef832xs389 jsonfile')
 #        
 
 
