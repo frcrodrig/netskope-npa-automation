@@ -190,50 +190,53 @@ def pullprivateappjson(tenant, APItokenforprivateapps, jsonfile):
 # main function
 # def Netskope-read-apps(tenant, APItokenforprivateapps, APItokenforpublisher, appfilejson, appfilexlsx):
 #
-#  Someday I'll do this with a real main() function call and I'll use argparse module (haha)
+#  Someday I'll use argparse module (haha)
 #
 ####### Check for correct arguments and deliver help message
 # 
-if len(sys.argv) > 1 and sys.argv[1] == '--help':
+
+def main():
+    if len(sys.argv) > 1 and sys.argv[1] == '--help':
         print('Full tenant hostname, API token, destination JSON filename, destination excel filename required.  In order \n')
         print('Example:    python3 pull-private-apps.py hostname.goskope.com a458ef832xs389 myoutputjson myoutputexcel')
         exit()
 
 
-if len(sys.argv) < 5:
+    if len(sys.argv) < 5:
         print("Error: This program requires 5 arguments: Full tenant hostname, API token for private apps, API token for publishers, and destination filenames required  ")
         print('Example:    python3 pull-private-apps.py hostname.goskope.com a458ef832xs389 b4837a933f myoutputjson myoutputexcel')
         exit()
 
-arg1 = sys.argv[1]
-arg2 = sys.argv[2]
-arg3 = sys.argv[3]
-arg4 = sys.argv[4]
-arg5 = sys.argv[5]
+    arg1 = sys.argv[1]
+    arg2 = sys.argv[2]
+    arg3 = sys.argv[3]
+    arg4 = sys.argv[4]
+    arg5 = sys.argv[5]
 
-if len([arg1, arg2, arg3, arg4, arg5]) < 5:
-    raise Exception("This function requires 5 arguments")
-    exit()
+    if len([arg1, arg2, arg3, arg4, arg5]) < 5:
+        raise Exception("This function requires 5 arguments")
+        exit()
 
-tenant = str(arg1)
-APItokenforprivateapps = str(arg2)
-APItokenforpublisher = str(arg3)
-jsonfile = str(arg4)
-excelfile = str(arg5)
-publisherjsonfile = 'testfile-publisher-api.json'
+    tenant = str(arg1)
+    APItokenforprivateapps = str(arg2)
+    APItokenforpublisher = str(arg3)
+    jsonfile = str(arg4)
+    excelfile = str(arg5)
+    publisherjsonfile = 'testfile-publisher-api.json'
 
 # pull publisher list
-listofpublishers = pullpublisherjson(tenant, APItokenforpublisher, publisherjsonfile)
+    listofpublishers = pullpublisherjson(tenant, APItokenforpublisher, publisherjsonfile)
 
 # pull private app via API
-pullprivateappjson(tenant, APItokenforprivateapps, jsonfile)
+    pullprivateappjson(tenant, APItokenforprivateapps, jsonfile)
 
 # create private app list with publishers and write to excel file.
-createprivateappidlist(jsonfile, excelfile, listofpublishers)
+    createprivateappidlist(jsonfile, excelfile, listofpublishers)
 
 
-print('###################################\n\n')
+    print('###################################\n\n')
 
-
+if __name__ == "__main__":
+    main()
     
    
