@@ -76,7 +76,8 @@ def pullpublisherjson(tenant, APItokenforpublisher, jsonfile):
     return(publisherlist)  
 
 ######################################################################################
-# This function reads the json file of private apps, pulls out some of the attributes into a list and creates a spreadsheet with them.
+# This function reads a json file of private apps (created in another function below), 
+# pulls out some of the attributes into a list and creates a spreadsheet with them.
 
 def createprivateappidlist(jsonfile, excelfile, publisherlist): 
     with open(jsonfile, 'r') as f:
@@ -187,10 +188,9 @@ def pullprivateappjson(tenant, APItokenforprivateapps, jsonfile):
 ##########################################################################
 #
 # main function
-# def tronstart(tenant, APItokenforprivateapps, APItokenforpublisher, appfilejson, appfilexlsx):
+# def Netskope-read-apps(tenant, APItokenforprivateapps, APItokenforpublisher, appfilejson, appfilexlsx):
 #
-#
-# Start here
+#  Someday I'll do this with a real main() function call and I'll use argparse module (haha)
 #
 ####### Check for correct arguments and deliver help message
 # 
