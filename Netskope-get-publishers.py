@@ -10,7 +10,7 @@
 #
 # Requires the following arguments in order:
 # 	Full tenant hostname, API token, json filename
-# Example:    python3 tron-get-publishers hostname.goskope.com a458ef832xs389 jsonfile')
+# Example:    python3 netskope-get-publishers hostname.goskope.com a458ef832xs389 jsonfile')
 #        
 
 
@@ -71,28 +71,26 @@ def createpublisherlist(publisherjsonfile):
   
 ###############################     End of functions
 
-# check for correct arguments
-if len(sys.argv) > 1 and sys.argv[1] == '--help':
+
+if not len(sys.argv) > 1:
+    arg1 = input("Enter full tenant name: ")
+    arg2 = input("Enter API key/token: ")
+    arg3 = input("Enter temporary JSON filename: ")
+elif len(sys.argv) > 1 and sys.argv[1] == '--help':
         print('Full tenant hostname, API token, and json filename required.  In order \n')
         print('Example:    python3 tron-get-publishers hostname.goskope.com a458ef832xs389 jsonfile')
         exit()
-
-
-if len(sys.argv) < 3:
-    print('Error: This program requires 2 arguments: Full tenant hostname and API token required')
+elif len(sys.argv) < 3:
+    print('Error: This program requires 3 arguments: Full tenant hostname, API token and temp JSON file')
     print('Example:    python3 tron-get-publishers hostname.goskope.com a458ef832xs389 myoutputjson')
     exit()
-
-arg1=sys.argv[1]
-arg2=sys.argv[2]
-arg3=sys.argv[3]
-
-if len([arg1, arg2, arg3]) < 3:
-        raise Exception("This function requires 3 arguments")
+else:
+    arg1=sys.argv[1]
+    arg2=sys.argv[2]
+    arg3=sys.argv[3]
 
 tenant = str(arg1)
 APItoken = str(arg2)
-
 publisherjsonfile = str(arg3)
 
 pullpublisherjson(tenant, APItoken, publisherjsonfile)

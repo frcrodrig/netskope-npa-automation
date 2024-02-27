@@ -1,0 +1,38 @@
+[
+    {
+        "publisher_id": 58,
+        "publisher_name": "VadimAwsAmi",
+        "common_name": "80fa3a9cafc540fa",
+        "ip_address": "172.31.33.43"
+    },
+    {
+        "publisher_id": 74,
+        "publisher_name": "USEast1aMgmt",
+        "common_name": "2a4a30f5bc86779a",
+        "ip_address": "10.0.3.17"
+    },
+    {
+        "publisher_id": 99,
+        "publisher_name": "Woodbridge_Gateway",
+        "common_name": "1a3c67446a751f3a",
+        "ip_address": "192.168.3.139"
+    },
+    {
+        "publisher_id": 111,
+        "publisher_name": "CrabAlley Datacenter",
+        "common_name": "9d5fdf17b2533319",
+        "ip_address": "192.168.7.25"
+    },
+    {
+        "publisher_id": 115,
+        "publisher_name": "Ohsome_VPC",
+        "common_name": "ad0c691dc0e50a19",
+        "ip_address": "10.0.0.25"
+    },
+    {
+        "publisher_id": 118,
+        "publisher_name": "Crab Alley Publisher 4",
+        "common_name": "183262d1b9afbd5a",
+        "ip_address": "192.168.7.52"
+    }
+]

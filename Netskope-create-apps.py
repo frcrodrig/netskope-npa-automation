@@ -6,7 +6,7 @@ import json
 import socket
 from openpyxl import load_workbook
 
-# tron-create apps is a python script that reads a spreadsheet, creates a json object/file and then uses the Private
+# netskope-create apps is a python script that reads a spreadsheet, creates a json object/file and then uses the Private
 # Apps API to post this json data and create a new private app.
 # 
 # It currently uses a Netskope APIv2 endpoint and needs Read/Write access:
@@ -243,7 +243,7 @@ json_data = json.dumps(data, indent=4)
 # Print the JSON data
 print(json_data)
 
-with open( 'temp-tron-create-apps-json.json', 'w') as f:
+with open( 'temp-create-apps-json.json', 'w') as f:
         json.dump(data, f, indent=4,)
 
 
