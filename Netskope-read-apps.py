@@ -3,6 +3,7 @@ import logging
 import requests
 import json
 import pandas as pd
+import argparse
 
 
 # netskope-read-apps is script/functions that pulls the private apps via API, then pulls the publisher names and formats
@@ -13,10 +14,16 @@ import pandas as pd
 # '/api/v2/infrastructure/publishers'
 # '/api/v2/steering/apps/private'
 #
-# It requires 4 arguments in order:  tenant name, private app API key, Publisher API key, destination Json filename, destination excel filename
+# It requires these arguments in order:  tenant name, private app API key, Publisher API key, destination Json filename, destination excel filename
 # excel file must end in .xlsx
 #
+#  If you don't specify arguments in will prompt for them.
+#
+#  You can specify a filename with arguments by using the argument '@filename.txt'
+#  This file should contain the argument value in order (above) on seperate lines.
+#
 # It also requires pandas which sometimes is not installed (sudo pip install pandas)
+# Also requires openpyxl (sudo pip install openpyxl)
 #
 # This was written for Netskope release 101 originally, python 3.10 and pandas 2.0.1
 #
@@ -27,15 +34,22 @@ import pandas as pd
 
 def pullpublisherjson(tenant, APItokenforpublisher, jsonfile):
 
+    print('\n Starting function pullpublisherjson')
+
 # API Endpoint URL for getting publishers
     API_URL_FOR_PUBLISHER = '/api/v2/infrastructure/publishers'
 
 # Format the three arguments
-    apiurlrequest = 'http://' + tenant + API_URL_FOR_PUBLISHER
+    apiurlrequest = 'https://' + tenant + API_URL_FOR_PUBLISHER
     netskopeapitoken = { 'Netskope-Api-Token': APItokenforpublisher }
+
+    print('\n API request is: '+ apiurlrequest)
+
+
 
 # Get the JSON from the tenant via Netskope API
     webresponse = requests.get(apiurlrequest, headers=netskopeapitoken)
+    print('\n HTTP response is:' + str(webresponse))
 
 # Load into a JSON object
     publisherlist = json.loads(webresponse.text)
@@ -59,36 +73,51 @@ def pullpublisherjson(tenant, APItokenforpublisher, jsonfile):
 
 # loop through the json file and pull only the items we need into a list
 
+    print('\n Got publisher list....looping through list:\n')
+
     for pub in publishers: 
         publisher_id = pub['publisher_id']
         publisher_name = pub['publisher_name']
         common_name = pub['common_name']
         ip_address = pub['assessment']['ip_address']
+        print('\n', publisher_id, publisher_name, common_name, ip_address)
         publisherlist.append({'publisher_id': publisher_id, 'publisher_name': publisher_name, 'common_name': common_name, 'ip_address': ip_address})
 
 # write the list to a json file
 
+    print('\n Writing list to temp file publisher-jsonoutput.json....')
+
     with open('publisher-jsonoutput.json', 'w') as output_file:
 	    json.dump(publisherlist, output_file, indent=4)
-    
-# return the list to whatever called us.
 
-    return(publisherlist)  
+    print('Done')
+
+# return the list to whatever called us.
+    return publisherlist
+
+
+
 
 ######################################################################################
 # This function reads a json file of private apps (created in another function below), 
 # pulls out some of the attributes into a list and creates a spreadsheet with them.
 
 def createprivateappidlist(jsonfile, excelfile, publisherlist): 
+
+    print('\n Running function createprivateappidlist...\n')
+
     with open(jsonfile, 'r') as f:
         data = json.load(f)
 
         private_apps = data['data']['private_apps']
 #        print(f"Number of objects in private_apps: {len(private_apps)}")
-    
+    print('\n Read private app list from file: ' + str(jsonfile))
     privateapplist = []
 
 # loop through the private apps 
+    
+    print('\n Looping through JSON file....\n')
+    
     for app in private_apps:  
         app_id = app['app_id']
         app_name = app['app_name']
@@ -140,6 +169,9 @@ def createprivateappidlist(jsonfile, excelfile, publisherlist):
         #  Add everything to the private app list
         privateapplist.append((app_id, app_name, host, use_publisher_dns, portresult_str, publisherresult_str))   
 
+    print('\n Finished adding private apps: \n')
+    print(str(privateapplist))
+
 #    length = len(privateapplist)
 #    print('Length of list:'+str(length))
 #    print(privateapplist)
@@ -148,6 +180,8 @@ def createprivateappidlist(jsonfile, excelfile, publisherlist):
 #   output to an excel file
     df = pd.DataFrame(privateapplist, columns=['app_id', 'app_name', 'host', 'use_publisher_dns', 'port/protocol', 'publisher_name/publisher_id'])
     df.to_excel(excelfile, index=False)
+    print('\n Finished writing to execl file: ' +str(excelfile))
+
 
 
 #######################################################################
@@ -155,6 +189,8 @@ def createprivateappidlist(jsonfile, excelfile, publisherlist):
 # This function pulls the private apps via API and writes to a json file.
 
 def pullprivateappjson(tenant, APItokenforprivateapps, jsonfile):
+
+    print('\n Running function pullprivateappjson')
 
 #   API Endpoint URL for getting private apps
 
@@ -172,16 +208,25 @@ def pullprivateappjson(tenant, APItokenforprivateapps, jsonfile):
 
 # Get the JSON from the tenant via Netskope API
 
+    print('\n Sending API request for privaate apps....')
+
     webresponse = requests.get(appurlrequest, headers=netskopeapitoken)
+
+    print('\n Got response: ' + str(webresponse))
 
 # Load into a JSON object
     privateapplist = json.loads(webresponse.text)
+
+    print('\n Private apps are: \n')
+    print(str(privateapplist))
 
 #  print it for debug
 #print(appconfig)
 
 
 # Save it to a file
+    print(']\n Saving it to file: ' + str(outputfile))
+
     with open(str(outputfile), 'w') as f:
         json.dump(privateapplist, f, indent=4,)
 
@@ -195,33 +240,51 @@ def pullprivateappjson(tenant, APItokenforprivateapps, jsonfile):
 ####### Check for correct arguments and deliver help message
 # 
 
+
+def get_parameters_via_input():
+
+    print('\n Running function get_parameters_via_input')
+
+    print('\n Asking for parameters: \n')
+
+    tenant = input("Enter tenant URL: ")
+    APItokenforprivateapps = input("Enter API key for reading private apps: ")
+    APItokenforpublisher = input("Enter API key for reading publishers : ")
+    jsonfile = input("Enter a name for the temporary JSON file: ")
+    excelfile = input("Enter a name for the Excel file: ")
+    return(tenant, APItokenforprivateapps, APItokenforpublisher, jsonfile, excelfile)
+
+
 def main():
-    if len(sys.argv) > 1 and sys.argv[1] == '--help':
-        print('Full tenant hostname, API token, destination JSON filename, destination excel filename required.  In order \n')
-        print('Example:    python3 pull-private-apps.py hostname.goskope.com a458ef832xs389 myoutputjson myoutputexcel')
-        exit()
 
+    tenant = ""
+    APItokenforprivateapps = ""
+    APItokenforpublisher = ""
+    jsonfile = ""
+    excelfile = ""
 
-    if len(sys.argv) < 5:
-        print("Error: This program requires 5 arguments: Full tenant hostname, API token for private apps, API token for publishers, and destination filenames required  ")
-        print('Example:    python3 pull-private-apps.py hostname.goskope.com a458ef832xs389 b4837a933f myoutputjson myoutputexcel')
-        exit()
+    if not len(sys.argv) > 1:
+        get_parameters_via_input()
+    else:
+        print('\n Using argparse function to process arguments/parameters \n')
+        parser = argparse.ArgumentParser(fromfile_prefix_chars="@", description="Reads private apps and saves to Excel file") 
+        parser.add_argument("tenant", help="URL for the tenant")
+        parser.add_argument("APItokenforprivateapps", help="API key for reading Netskope private apps")
+        parser.add_argument("APItokenforpublisher", help="API key for reading Netskope publishers" )
+        parser.add_argument("jsonfile", help="name of temporary JSON file" )
+        parser.add_argument("excelfile", help="name of Excel file" )
+        args = parser.parse_args()
+        
+# This can probably be more efficient with a seperate function and dictionary....change later
 
-    arg1 = sys.argv[1]
-    arg2 = sys.argv[2]
-    arg3 = sys.argv[3]
-    arg4 = sys.argv[4]
-    arg5 = sys.argv[5]
+        tenant = args.tenant
+        APItokenforprivateapps = args.APItokenforprivateapps
+        APItokenforpublisher = args.APItokenforpublisher
+        jsonfile = args.jsonfile
+        excelfile = args.excelfile
 
-    if len([arg1, arg2, arg3, arg4, arg5]) < 5:
-        raise Exception("This function requires 5 arguments")
-        exit()
-
-    tenant = str(arg1)
-    APItokenforprivateapps = str(arg2)
-    APItokenforpublisher = str(arg3)
-    jsonfile = str(arg4)
-    excelfile = str(arg5)
+    print('\n Got the following arguments: \n')   
+    print(tenant, APItokenforprivateapps, APItokenforpublisher, jsonfile, excelfile)    
     publisherjsonfile = 'testfile-publisher-api.json'
 
 # pull publisher list
@@ -234,7 +297,7 @@ def main():
     createprivateappidlist(jsonfile, excelfile, listofpublishers)
 
 
-    print('###################################\n\n')
+    print('###################################\nFinished....main()\n')
 
 if __name__ == "__main__":
     main()

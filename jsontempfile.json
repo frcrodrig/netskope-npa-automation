@@ -1,0 +1,636 @@
+{
+    "data": {
+        "private_apps": [
+            {
+                "allow_unauthenticated_cors": false,
+                "app_id": 90,
+                "app_name": "[SplunkAWSUSEast]",
+                "clientless_access": null,
+                "host": "10.0.0.197",
+                "is_user_portal_app": false,
+                "modified_by": "vsundaram@netskope.com",
+                "modify_time": "2021-05-10 18:13:36",
+                "policies": [
+                    "AWSUsEastAllowNPA"
+                ],
+                "private_app_protocol": null,
+                "protocols": [
+                    {
+                        "created_at": "2021-05-10T18:13:36.546Z",
+                        "id": 97,
+                        "port": "8000",
+                        "service_id": 25,
+                        "transport": "tcp",
+                        "updated_at": "2021-05-10T18:13:36.546Z"
+                    },
+                    {
+                        "created_at": "2021-05-10T18:13:36.548Z",
+                        "id": 98,
+                        "port": "8000",
+                        "service_id": 25,
+                        "transport": "udp",
+                        "updated_at": "2021-05-10T18:13:36.548Z"
+                    }
+                ],
+                "public_host": "",
+                "reachability": {
+                    "reachable": false
+                },
+                "real_host": null,
+                "service_publisher_assignments": [
+                    {
+                        "primary": null,
+                        "publisher_id": 74,
+                        "publisher_name": "USEast1aMgmt",
+                        "reachability": {
+                            "error_code": 0,
+                            "error_string": "Publisher servicing this private app is disconnected.",
+                            "reachable": false
+                        },
+                        "service_id": 90
+                    }
+                ],
+                "steering_configs": [
+                    "Default tenant config - MMTest Client Configs",
+                    "Default tenant config"
+                ],
+                "supplement_dns_for_osx": false,
+                "tags": [],
+                "trust_self_signed_certs": null,
+                "use_publisher_dns": true
+            },
+            {
+                "allow_unauthenticated_cors": false,
+                "app_id": 94,
+                "app_name": "[AWSWinBastionPub]",
+                "clientless_access": null,
+                "host": "10.0.0.216",
+                "is_user_portal_app": false,
+                "modified_by": "vsundaram@netskope.com",
+                "modify_time": "2020-11-13 18:24:23",
+                "policies": [
+                    "AWSUsEastAllowNPA"
+                ],
+                "private_app_protocol": null,
+                "protocols": [
+                    {
+                        "created_at": "2020-11-13T18:24:23.204Z",
+                        "id": 71,
+                        "port": "3389",
+                        "service_id": 26,
+                        "transport": "tcp",
+                        "updated_at": "2020-11-13T18:24:23.204Z"
+                    },
+                    {
+                        "created_at": "2020-11-13T18:24:23.205Z",
+                        "id": 72,
+                        "port": "3389",
+                        "service_id": 26,
+                        "transport": "udp",
+                        "updated_at": "2020-11-13T18:24:23.205Z"
+                    }
+                ],
+                "public_host": "",
+                "reachability": {
+                    "reachable": false
+                },
+                "real_host": null,
+                "service_publisher_assignments": [
+                    {
+                        "primary": true,
+                        "publisher_id": 74,
+                        "publisher_name": "USEast1aMgmt",
+                        "reachability": {
+                            "error_code": 0,
+                            "error_string": "Publisher servicing this private app is disconnected.",
+                            "reachable": false
+                        },
+                        "service_id": 94
+                    },
+                    {
+                        "primary": false,
+                        "publisher_id": null,
+                        "publisher_name": null,
+                        "reachability": null,
+                        "service_id": 94
+                    }
+                ],
+                "steering_configs": [
+                    "Default tenant config - MMTest Client Configs",
+                    "Default tenant config"
+                ],
+                "supplement_dns_for_osx": false,
+                "tags": [],
+                "trust_self_signed_certs": null,
+                "use_publisher_dns": true
+            },
+            {
+                "allow_unauthenticated_cors": false,
+                "app_id": 98,
+                "app_name": "[PAN Management]",
+                "clientless_access": null,
+                "host": "10.0.3.76",
+                "is_user_portal_app": false,
+                "modified_by": "sbrunstrom@netskope.com",
+                "modify_time": "2021-04-08 18:14:09",
+                "policies": [
+                    "AWSUsEastAllowNPA"
+                ],
+                "private_app_protocol": null,
+                "protocols": [
+                    {
+                        "created_at": "2021-04-08T18:14:09.960Z",
+                        "id": 85,
+                        "port": "443",
+                        "service_id": 27,
+                        "transport": "tcp",
+                        "updated_at": "2021-04-08T18:14:09.960Z"
+                    },
+                    {
+                        "created_at": "2021-04-08T18:14:09.961Z",
+                        "id": 86,
+                        "port": "22",
+                        "service_id": 27,
+                        "transport": "tcp",
+                        "updated_at": "2021-04-08T18:14:09.961Z"
+                    }
+                ],
+                "public_host": "",
+                "reachability": {
+                    "reachable": false
+                },
+                "real_host": null,
+                "service_publisher_assignments": [
+                    {
+                        "primary": null,
+                        "publisher_id": 74,
+                        "publisher_name": "USEast1aMgmt",
+                        "reachability": {
+                            "error_code": 0,
+                            "error_string": "Publisher servicing this private app is disconnected.",
+                            "reachable": false
+                        },
+                        "service_id": 98
+                    }
+                ],
+                "steering_configs": [
+                    "Default tenant config - MMTest Client Configs",
+                    "Default tenant config"
+                ],
+                "supplement_dns_for_osx": false,
+                "tags": [],
+                "trust_self_signed_certs": null,
+                "use_publisher_dns": false
+            },
+            {
+                "allow_unauthenticated_cors": false,
+                "app_id": 102,
+                "app_name": "[DPOP]",
+                "clientless_access": null,
+                "host": "10.0.3.174,10.0.0.100",
+                "is_user_portal_app": false,
+                "modified_by": "vsundaram@netskope.com",
+                "modify_time": "2020-12-02 18:32:06",
+                "policies": [
+                    "AWSUsEastAllowNPA"
+                ],
+                "private_app_protocol": null,
+                "protocols": [
+                    {
+                        "created_at": "2020-12-02T18:32:06.144Z",
+                        "id": 81,
+                        "port": "1-65000",
+                        "service_id": 28,
+                        "transport": "tcp",
+                        "updated_at": "2020-12-02T18:32:06.144Z"
+                    },
+                    {
+                        "created_at": "2020-12-02T18:32:06.145Z",
+                        "id": 82,
+                        "port": "1-65000",
+                        "service_id": 28,
+                        "transport": "udp",
+                        "updated_at": "2020-12-02T18:32:06.145Z"
+                    }
+                ],
+                "public_host": "",
+                "reachability": {
+                    "reachable": false
+                },
+                "real_host": null,
+                "service_publisher_assignments": [
+                    {
+                        "primary": true,
+                        "publisher_id": 74,
+                        "publisher_name": "USEast1aMgmt",
+                        "reachability": {
+                            "error_code": 0,
+                            "error_string": "Publisher servicing this private app is disconnected.",
+                            "reachable": false
+                        },
+                        "service_id": 102
+                    },
+                    {
+                        "primary": false,
+                        "publisher_id": null,
+                        "publisher_name": null,
+                        "reachability": null,
+                        "service_id": 102
+                    }
+                ],
+                "steering_configs": [
+                    "Default tenant config - MMTest Client Configs",
+                    "Default tenant config"
+                ],
+                "supplement_dns_for_osx": false,
+                "tags": [],
+                "trust_self_signed_certs": null,
+                "use_publisher_dns": false
+            },
+            {
+                "allow_unauthenticated_cors": false,
+                "app_id": 107,
+                "app_name": "[Splunk East 1]",
+                "clientless_access": true,
+                "host": "34.229.50.53",
+                "is_user_portal_app": false,
+                "modified_by": "johs@netskope.com",
+                "modify_time": "2021-09-15 08:08:26",
+                "policies": [
+                    "AWSUsEastAllowNPA"
+                ],
+                "private_app_protocol": "http",
+                "protocols": [
+                    {
+                        "created_at": "2021-09-15T08:08:27.044Z",
+                        "id": 99,
+                        "port": "8000",
+                        "service_id": 29,
+                        "transport": "tcp",
+                        "updated_at": "2021-09-15T08:08:27.044Z"
+                    },
+                    {
+                        "created_at": "2021-09-15T08:08:27.049Z",
+                        "id": 100,
+                        "port": "8000",
+                        "service_id": 29,
+                        "transport": "udp",
+                        "updated_at": "2021-09-15T08:08:27.049Z"
+                    }
+                ],
+                "public_host": "https://34-229-50-53-8000-federal.npaproxy.goskope.com",
+                "reachability": {
+                    "reachable": false
+                },
+                "real_host": null,
+                "service_publisher_assignments": [
+                    {
+                        "primary": null,
+                        "publisher_id": 74,
+                        "publisher_name": "USEast1aMgmt",
+                        "reachability": {
+                            "error_code": 0,
+                            "error_string": "Publisher servicing this private app is disconnected.",
+                            "reachable": false
+                        },
+                        "service_id": 107
+                    }
+                ],
+                "steering_configs": [
+                    "Default tenant config - MMTest Client Configs",
+                    "Default tenant config"
+                ],
+                "supplement_dns_for_osx": false,
+                "tags": [],
+                "trust_self_signed_certs": false,
+                "use_publisher_dns": true
+            },
+            {
+                "allow_unauthenticated_cors": false,
+                "app_id": 119,
+                "app_name": "[Desktop_01]",
+                "clientless_access": false,
+                "host": "192.168.3.55",
+                "is_user_portal_app": false,
+                "modified_by": "johs@netskope.com",
+                "modify_time": "2022-09-01 17:53:48",
+                "policies": [
+                    "NPA Desktop-01 Access"
+                ],
+                "private_app_protocol": "http",
+                "protocols": [
+                    {
+                        "created_at": "2022-09-01T17:53:48.347Z",
+                        "id": 115,
+                        "port": "3389",
+                        "service_id": 33,
+                        "transport": "tcp",
+                        "updated_at": "2022-09-01T17:53:48.347Z"
+                    }
+                ],
+                "public_host": "",
+                "reachability": {
+                    "reachable": false
+                },
+                "real_host": "",
+                "service_publisher_assignments": [
+                    {
+                        "primary": null,
+                        "publisher_id": 99,
+                        "publisher_name": "Woodbridge_Gateway",
+                        "reachability": {
+                            "error_code": 0,
+                            "error_string": "Publisher servicing this private app is disconnected.",
+                            "reachable": false
+                        },
+                        "service_id": 119
+                    }
+                ],
+                "steering_configs": [
+                    "Default tenant config - MMTest Client Configs",
+                    "Default tenant config"
+                ],
+                "supplement_dns_for_osx": false,
+                "tags": [],
+                "trust_self_signed_certs": true,
+                "use_publisher_dns": false
+            },
+            {
+                "allow_unauthenticated_cors": false,
+                "app_id": 123,
+                "app_name": "[Mac_01]",
+                "clientless_access": false,
+                "host": "192.168.3.50",
+                "is_user_portal_app": false,
+                "modified_by": "johs@netskope.com",
+                "modify_time": "2022-09-01 18:25:43",
+                "policies": [
+                    "NPA Desktop-01 Access"
+                ],
+                "private_app_protocol": "http",
+                "protocols": [
+                    {
+                        "created_at": "2022-09-01T18:25:43.880Z",
+                        "id": 116,
+                        "port": "5900",
+                        "service_id": 34,
+                        "transport": "tcp",
+                        "updated_at": "2022-09-01T18:25:43.880Z"
+                    }
+                ],
+                "public_host": "",
+                "reachability": {
+                    "reachable": false
+                },
+                "real_host": "",
+                "service_publisher_assignments": [
+                    {
+                        "primary": null,
+                        "publisher_id": 99,
+                        "publisher_name": "Woodbridge_Gateway",
+                        "reachability": {
+                            "error_code": 0,
+                            "error_string": "Publisher servicing this private app is disconnected.",
+                            "reachable": false
+                        },
+                        "service_id": 123
+                    }
+                ],
+                "steering_configs": [
+                    "Default tenant config - MMTest Client Configs",
+                    "Default tenant config"
+                ],
+                "supplement_dns_for_osx": false,
+                "tags": [],
+                "trust_self_signed_certs": true,
+                "use_publisher_dns": false
+            },
+            {
+                "allow_unauthenticated_cors": false,
+                "app_id": 195,
+                "app_name": "[AD-01]",
+                "clientless_access": false,
+                "host": "10.0.0.230",
+                "is_user_portal_app": false,
+                "modified_by": "johs@netskope.com",
+                "modify_time": "2023-10-03 08:49:42",
+                "policies": [
+                    "AD-01"
+                ],
+                "private_app_protocol": "http",
+                "protocols": [
+                    {
+                        "created_at": "2023-10-03T08:49:42.859Z",
+                        "id": 173,
+                        "port": "1-65000",
+                        "service_id": 53,
+                        "transport": "tcp",
+                        "updated_at": "2023-10-03T08:49:42.859Z"
+                    },
+                    {
+                        "created_at": "2023-10-03T08:49:42.860Z",
+                        "id": 174,
+                        "port": "1-65000",
+                        "service_id": 53,
+                        "transport": "udp",
+                        "updated_at": "2023-10-03T08:49:42.860Z"
+                    }
+                ],
+                "public_host": "",
+                "reachability": {
+                    "error_code": 0,
+                    "error_string": "",
+                    "reachable": true
+                },
+                "real_host": "",
+                "service_publisher_assignments": [
+                    {
+                        "primary": null,
+                        "publisher_id": 115,
+                        "publisher_name": "Ohsome_VPC",
+                        "reachability": {
+                            "error_code": 0,
+                            "error_string": "",
+                            "reachable": true
+                        },
+                        "service_id": 195
+                    }
+                ],
+                "steering_configs": [
+                    "Default tenant config - MMTest Client Configs",
+                    "Default tenant config"
+                ],
+                "supplement_dns_for_osx": false,
+                "tags": [],
+                "trust_self_signed_certs": true,
+                "use_publisher_dns": false
+            },
+            {
+                "allow_unauthenticated_cors": false,
+                "app_id": 198,
+                "app_name": "[Publisher Grafana Monitor]",
+                "clientless_access": false,
+                "host": "192.168.7.52",
+                "is_user_portal_app": false,
+                "modified_by": "sbrunstrom@netskope.com",
+                "modify_time": "2023-12-06 19:37:31",
+                "policies": [
+                    "ZTNA Publisher Monitor Access"
+                ],
+                "private_app_protocol": "http",
+                "protocols": [
+                    {
+                        "created_at": "2023-12-06T19:37:31.552Z",
+                        "id": 179,
+                        "port": "3000",
+                        "service_id": 54,
+                        "transport": "tcp",
+                        "updated_at": "2023-12-06T19:37:31.552Z"
+                    }
+                ],
+                "public_host": "",
+                "reachability": {
+                    "error_code": 110,
+                    "error_string": "Connection timed out",
+                    "reachable": false
+                },
+                "real_host": "",
+                "service_publisher_assignments": [
+                    {
+                        "primary": null,
+                        "publisher_id": 111,
+                        "publisher_name": "CrabAlley Datacenter",
+                        "reachability": {
+                            "error_code": 110,
+                            "error_string": "Connection timed out",
+                            "reachable": false
+                        },
+                        "service_id": 198
+                    }
+                ],
+                "steering_configs": [
+                    "Default tenant config - MMTest Client Configs",
+                    "Default tenant config"
+                ],
+                "supplement_dns_for_osx": false,
+                "tags": [],
+                "trust_self_signed_certs": true,
+                "use_publisher_dns": false
+            },
+            {
+                "allow_unauthenticated_cors": false,
+                "app_id": 202,
+                "app_name": "[CrabAlley Speed Test server]",
+                "clientless_access": false,
+                "host": "192.168.7.65",
+                "is_user_portal_app": false,
+                "modified_by": "sbrunstrom@netskope.com",
+                "modify_time": "2023-12-11 21:08:38",
+                "policies": [
+                    "[ZTNA] Access CrabAlley OpenSpeed Test server"
+                ],
+                "private_app_protocol": "http",
+                "protocols": [
+                    {
+                        "created_at": "2023-12-11T21:08:38.483Z",
+                        "id": 180,
+                        "port": "3000",
+                        "service_id": 55,
+                        "transport": "tcp",
+                        "updated_at": "2023-12-11T21:08:38.483Z"
+                    }
+                ],
+                "public_host": "",
+                "reachability": {
+                    "error_code": 0,
+                    "error_string": "",
+                    "reachable": true
+                },
+                "real_host": "",
+                "service_publisher_assignments": [
+                    {
+                        "primary": null,
+                        "publisher_id": 111,
+                        "publisher_name": "CrabAlley Datacenter",
+                        "reachability": {
+                            "error_code": 0,
+                            "error_string": "",
+                            "reachable": true
+                        },
+                        "service_id": 202
+                    }
+                ],
+                "steering_configs": [
+                    "Default tenant config - MMTest Client Configs",
+                    "Default tenant config"
+                ],
+                "supplement_dns_for_osx": false,
+                "tags": [],
+                "trust_self_signed_certs": true,
+                "use_publisher_dns": false
+            },
+            {
+                "allow_unauthenticated_cors": false,
+                "app_id": 206,
+                "app_name": "[CrabAlley Windows10]",
+                "clientless_access": false,
+                "host": "192.168.7.103",
+                "is_user_portal_app": false,
+                "modified_by": "sbrunstrom@netskope.com",
+                "modify_time": "2023-12-15 14:24:15",
+                "policies": [
+                    "[ZTNA] Allow access to CrabAlley Windows10"
+                ],
+                "private_app_protocol": "http",
+                "protocols": [
+                    {
+                        "created_at": "2023-12-15T14:24:15.113Z",
+                        "id": 181,
+                        "port": "1-65535",
+                        "service_id": 56,
+                        "transport": "tcp",
+                        "updated_at": "2023-12-15T14:24:15.113Z"
+                    },
+                    {
+                        "created_at": "2023-12-15T14:24:15.114Z",
+                        "id": 182,
+                        "port": "1-65535",
+                        "service_id": 56,
+                        "transport": "udp",
+                        "updated_at": "2023-12-15T14:24:15.114Z"
+                    }
+                ],
+                "public_host": "",
+                "reachability": {
+                    "error_code": 0,
+                    "error_string": "",
+                    "reachable": true
+                },
+                "real_host": "",
+                "service_publisher_assignments": [
+                    {
+                        "primary": null,
+                        "publisher_id": 111,
+                        "publisher_name": "CrabAlley Datacenter",
+                        "reachability": {
+                            "error_code": 0,
+                            "error_string": "",
+                            "reachable": true
+                        },
+                        "service_id": 206
+                    }
+                ],
+                "steering_configs": [
+                    "Default tenant config - MMTest Client Configs",
+                    "Default tenant config"
+                ],
+                "supplement_dns_for_osx": false,
+                "tags": [],
+                "trust_self_signed_certs": true,
+                "use_publisher_dns": false
+            }
+        ]
+    },
+    "status": "success",
+    "total": 11
+}
