@@ -1,5 +1,0 @@
-federal.goskope.com
-a452d429c57c515ae1d4b3cc0f6eed92
-91a5f9eb63191d81343ba203dd59b6bd
-jsontempfile.json
-exceloutput.xlsx
