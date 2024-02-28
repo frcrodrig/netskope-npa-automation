@@ -36,6 +36,9 @@ logging.basicConfig(level=logging.WARNING)
 # functions for checking IP address and returning true if it is non-routable.
 
 def is_valid_ipv4_address(address):
+
+    print('\n Checking for IPv4 non-routable address...\n')
+
     try:
         socket.inet_pton(socket.AF_INET, address)
     except AttributeError:  # no inet_pton here, sorry
@@ -61,6 +64,7 @@ def is_non_routeable_ipv4_address(address):
     return False
 
 def resolve_hostname_to_ip_address(hostname):
+    print('\n Resovling hostname to IP...\n')
     try:
         ip_address = socket.gethostbyname(hostname)
 
@@ -103,13 +107,23 @@ tenant = str(arg1)
 API_token = str(arg2)
 excelfile = str(arg3)
 
+print(']\n Arguments are: ')
+print(tenant)
+print(API_token)
+print(excelfile)
+
+
 # setup URL and HTTP headers
 API_URL = '/api/v2/steering/apps/private'
 appurlrequest = 'http://' + tenant + API_URL
 httpheaders = {'Content-type': 'application/json', 'Netskope-Api-Token': API_token }
 
+
+
 # Load the workbook
 wb = load_workbook(filename=excelfile)
+
+print('\n Loaded the excel file from: ' + excelfile)
 
 # Select the worksheet
 ws = wb['Sheet1']
@@ -117,16 +131,22 @@ ws = wb['Sheet1']
 # Get the column names from the first row
 header = [cell.value for cell in ws[1]]
 
+print('\n Getting column headers...')
+
 # Rename a couple of header column names to match json required.
 header[2] = 'host'
 header[4] = 'protocols'
 header[5] = 'publishers'
 
 
+print('\n Getting column indices....')
+
 # Get the column indices for the "protocols" and "publishers" columns, they will need to be modified
 port_protocol_index = header.index('protocols') + 1
 publisher_index = header.index('publishers') + 1
 host_index = header.index('host') + 1
+
+
 
 # create a private ip boolean flag
 private_ip = False
@@ -135,6 +155,9 @@ private_ip = False
 data = []
 
 # Iterate over the rows (skipping the first row)
+
+print('\n Looping through excel rows and cells.....')
+
 for row in ws.iter_rows(min_row=2):
 
     # Create a dictionary to store the data for this row
@@ -227,6 +250,8 @@ for row in ws.iter_rows(min_row=2):
     # Add the dictionary to the list only if it is a private IP address (skip the row if its a public IP)
     if private_ip == True:
         data.append(row_data)
+
+    
 
     # create a json document of just the row for the API call
     jsonrow_data = json.dumps(row_data, indent=4)
