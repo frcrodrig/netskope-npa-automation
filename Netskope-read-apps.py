@@ -33,6 +33,10 @@ import argparse
 # function to pull the list of publishers, write to a file for debug, and return it in a list.
 
 def pullpublisherjson(tenant, APItokenforpublisher, jsonfile):
+""" Requests the publishers from the tenant via API and writes to a JSON file for use later.
+	tenant - tenant FQDN
+ 	APItokenforpublisher - the API token for the tenant only read-only is needed
+  	jsonfile - a name for the JSON file"""
 
     print('\n Starting function pullpublisherjson')
 
@@ -98,12 +102,15 @@ def pullpublisherjson(tenant, APItokenforpublisher, jsonfile):
 
 
 
-######################################################################################
-# This function reads a json file of private apps (created in another function below), 
-# pulls out some of the attributes into a list and creates a spreadsheet with them.
 
 def createprivateappidlist(jsonfile, excelfile, publisherlist): 
+"""	This function reads a json file of private apps (created in another function below), 
+	pulls out some of the attributes into a list and creates a spreadsheet with them.
 
+	jsonfile - the JSON file created with the list of privater apps
+	excel file - the name of the excel spreadsheet file to create
+	publisherlist - a list of the publishers from the pullpublisherjson function"""
+ 
     print('\n Running function createprivateappidlist...\n')
 
     with open(jsonfile, 'r') as f:
